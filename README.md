@@ -1,196 +1,108 @@
-# Deep Scatterplots for the Web
+<h1 align="center">GPT4All</h1>
+<p align="center">Open-source assistant-style large language models that run locally on your CPU</p>
 
-This is a library for allowing interactive visualization of extremely large datasets, in browser.
+<p align="center">
+<a href="https://gpt4all.io">GPT4All Website</a>
+</p>
 
-It's fast for three reasons:
+<p align="center">
+<a href="https://docs.gpt4all.io">GPT4All Documentation</a>
+</p>
 
-1. All data is sent in the Apache Arrow `feather` format, in a
-   custom quadtree format that makes it possible to only load
-   data as needed on zoom. Feather takes no time to parse in the browser
-   once transferred, compresses pretty well, and can be directly copied to the GPU without
-   transformation in JS. This is [the way of the future.](https://benschmidt.org/post/2020-01-15/2020-01-15-webgpu/)
-   We also now allow custom in-browser calculations on Arrow data.
-2. Most rendering is done in custom layers using WebGL, with a
-   buffer management strategy handled by REGL. This means that
-   there are no unnecessary abstractions around points or separate draw calls
-   for different objects; a minimum number of buffers are attached for all
-   needed points.
-3. Almost all grammar-of-graphics transforms such are handled on the GPU,
-   which allows for interpolated transitions with calculations
-   done in parallel.
+<p align="center">
+<a href="https://discord.gg/mGZE39AS3e">Discord</a>
+</p>
 
-It also runs in completely static settings, so you can host a million-point scatterplot over something like Github Pages.
+<p align="center">
+<a href="https://python.langchain.com/en/latest/modules/models/llms/integrations/gpt4all.html">🦜️🔗 Official Langchain Backend</a> 
+</p>
 
-Deepscatter is the underlying graphics engine for [Atlas](https://atlas.nomic.ai). It is provided under an NC-CC-BY-SA license for all noncommercial use.
+<p align="center">
+GPT4All is made possible by our compute partner <a href="https://www.paperspace.com/">Paperspace</a>.
+</p>
 
-# Examples
+<p align="center">
+  <img width="600" height="365" src="https://user-images.githubusercontent.com/13879686/231876409-e3de1934-93bb-4b4b-9013-b491a969ebbc.gif">
+</p>
+<p align="center">
+Run on an M1 Mac (not sped up!)
+</p>
 
-- [Atlas map of 5.5 million tweets](https://atlas.nomic.ai/map/twitter). (Nomic)
-- [Narrative visualization of 20 million biomedical abstracts embedded using T-SNE.](https://static.nomic.ai/pubmed.html). (Collaboration between Nomic and the University of Tübingen).
-- [1 million+ documents from arxiv.com](https://observablehq.com/@bmschmidt/arxiv) rendered inside an Observable notebook. (Ben Schmidt)
-- [Every person in the 2010 and 2020 US Censuses](https://all-of-us.benschmidt.org) displayed in an interactive svelte-kit app. (Ben Schmidt)
-- [Newspaper Articles at the Library of Congress from the Reconstruction Era](https://situating.us/explore). (Andromeda Yelton while in residency at the Library of Congress).
+## GPT4All: An ecosystem of open-source on-edge large language models.
+GPT4All is an ecosystem to train and deploy **powerful** and **customized** large language models that run locally on consumer grade CPUs.
 
-# Get help
+Learn more in the [documentation](https://docs.gpt4all.io).
 
-Github issues, even low quality ones, are welcome here.
+The goal is simple - be the best instruction tuned assistant-style language model that any person or enterprise can freely use, distribute and build on.
 
-There is also a dedicated [Deepscatter Slack](https://join.slack.com/t/deepscatter/shared_invite/zt-17kbudjhj-zVzt26zddEpSyACe2E71Fw) which you are welcome to join. Nomic maintains a [discord server](https://discord.gg/4M2QFmTt2k) that has dedicated Deepscatter and Atlas support channels.
+A GPT4All model is a 3GB - 8GB file that you can download and plug into the GPT4All open-source ecosystem software. **Nomic AI** supports and maintains this software ecosystem to enforce quality and security alongside spearheading the effort to allow any person or enterprise to easily train and deploy their own on-edge large language models. 
 
-I came into doing this stuff from a very non-technical background and welcome people to join with naive questions.
 
-# Quick start
+### Chat Client
+Run any GPT4All model natively on your home desktop with the auto-updating desktop chat client. See <a href="https://gpt4all.io">GPT4All Website</a> for a full list of open-source models you can run with this powerful desktop application.
 
-## Importing the module.
+Direct Installer Links:
 
-See the [arxiv example above](https://observablehq.com/@bmschmidt/arxiv) to see some basic examples.
+* [Mac/OSX](https://gpt4all.io/installers/gpt4all-installer-darwin.dmg)
 
-## Running locally.
+* [Windows](https://gpt4all.io/installers/gpt4all-installer-win64.exe)
 
-First, install the companion tiling library, which is written in python,
-and generate a million points of test data in tiles of 50000 apiece.
+* [Ubuntu](https://gpt4all.io/installers/gpt4all-installer-linux.run)
 
-```sh
-python3 -V # requires Python 3.9.x or 3.10.x
-python3 -m pip install git+https://github.com/bmschmidt/quadfeather
-quadfeather-test-data 1_000_000
-quadfeather --files tmp.csv --tile_size 50_000 --destination tiles
+If you have older hardware that only supports avx and not avx2 you can use these.
+
+* [Mac/OSX - avx-only](https://gpt4all.io/installers/gpt4all-installer-darwin-avx-only.dmg)
+
+* [Windows - avx-only](https://gpt4all.io/installers/gpt4all-installer-win64-avx-only.exe)
+
+* [Ubuntu - avx-only](https://gpt4all.io/installers/gpt4all-installer-linux-avx-only.run)
+
+Find the most up-to-date information on the [GPT4All Website](https://gpt4all.io/)
+
+### Chat Client building and running
+
+* Follow the visual instructions on the chat client [build_and_run](gpt4all-chat/build_and_run.md) page
+
+### Bindings
+
+* <a href="https://github.com/nomic-ai/gpt4all/tree/main/gpt4all-bindings/python/README.md">:snake: Official Python Bindings</a>
+* <a href="https://github.com/nomic-ai/gpt4all/tree/main/gpt4all-bindings/typescript">:computer: Official Typescript Bindings</a>
+* <a href="https://github.com/nomic-ai/gpt4all/tree/main/gpt4all-bindings/golang">:computer: Official GoLang Bindings</a>
+* <a href="https://github.com/nomic-ai/gpt4all/tree/main/gpt4all-bindings/csharp">:computer: Official C# Bindings</a>
+
+
+## Contributing
+GPT4All welcomes contributions, involvement, and discussion from the open source community!
+Please see CONTRIBUTING.md and follow the issues, bug reports, and PR markdown templates.
+
+Check project discord, with project owners, or through existing issues/PRs to avoid duplicate work.
+Please make sure to tag all of the above with relevant project identifiers or your contribution could potentially get lost.
+Example tags: `backend`, `bindings`, `python-bindings`, `documentation`, etc.
+
+## Technical Reports
+
+<p align="center">
+<a href="https://gpt4all.io/reports/GPT4All_Technical_Report_3.pdf">:green_book: Technical Report 3: GPT4All Snoozy and Groovy </a>
+</p>
+
+<p align="center">
+<a href="https://static.nomic.ai/gpt4all/2023_GPT4All-J_Technical_Report_2.pdf">:green_book: Technical Report 2: GPT4All-J </a>
+</p>
+
+<p align="center">
+<a href="https://s3.amazonaws.com/static.nomic.ai/gpt4all/2023_GPT4All_Technical_Report.pdf">:green_book: Technical Report 1: GPT4All</a>
+</p>
+
+## Citation
+
+If you utilize this repository, models or data in a downstream project, please consider citing it with:
 ```
-
-Then setup this library to run. It will start a local dev server.
-
-```sh
-npm i
-npm run dev
-```
-
-If you go to `localhost:3344`, you should see an interactive scatterplot. To dig into what you're seeing, open `index.html`.
-(In 2021, this development site works in Chrome, not Safari or Firefox, because it uses ES6 module syntax inside the webworker. The distributed version of
-the module should work in all browsers.)
-
-## Your own data.
-
-1. Create a CSV, parquet, or feather file that has columns called 'x' and 'y'. (Or a feather file that has columns `x`, `y`). Any other columns (categorical information, etc.) can be included as additional columns.
-
-2. Tile it:
-
-```sh
-cd deepscatter # if you're not already there
-quadfeather --files ../some-path-to/your-data.csv --tile_size 50000 --destination tiles
-```
-
-3. Assuming your dataset has an `x` and `y` column and the `tiles` folder is in the root directory of this project, you can see the data visualized by running
-
-```sh
-npm run dev
-```
-
-and opening `http://localhost:3345/index-simplest-way-to-start.html` in your browser.
-
-To edit the visualization, or to troubleshoot, look at the file `index-simplest-way-to-start.html`, where you should find a bare-bones implementation of deepscatter.
-
-Explore `index.html`, and render it at `http://localhost:3345/index.html`, for a more advanced example.
-
-Note: Ideally, in a future release you'll be able to create these specs in away that doesn't require coding JSON directly.
-
-## Build the module
-
-```sh
-npm run build
-```
-
-will create an ES module at `dist/deepscatter.es.js` The mechanics of
-importing this are very slightly different than `index.html`.
-
-Note that this is an ESM module and so requires you to use `<script type="module">` in your code.
-Don't worry! We're allowed to
-do this now! But do be aware that this will not work on computers running very old browsers.
-
-Snippet:
-
-```html
-<div id="my-div"></div>
-<script type="module">
-  import Scatterplot from './dist/deepscatter.umd.js';
-  f = new Scatterplot('#my-div');
-</script>
-```
-
-See `index_prod.html` for an example
-
-This is currently bundled with vite and rollup. There is/will be a further interaction layer on
-top of it, but the core plotting components are separate and should work as a standalone layer that supports
-plot requests via an API.
-
-# Code strategy
-
-Any interaction logic that changes the API call directly does not belong in this library. The only
-interaction code here is for zooming and interacting with points.
-
-## Future codebase splits.
-
-The plotting components and the tiling components are logically quite separate; I may break
-the tiling strategy into a separate JS library called 'quadfeather'.
-
-Apache Arrow would still be a necessary intermediate format, but it could be generated from CSV files
-using, say, `arquero` or a WASM port of `DuckDB`.
-
-# API
-
-This is still subject to change and is not fully documented. The encoding portion of the API mimics Vega-Lite with some minor distinctions to avoid deeply-nested queries and to add animation and jitter parameters.
-
-```js
-{
-   encoding: {
-     "x": {
-         "field": "x",
-         "transform": "literal"
-     },
-     "color": {
-         "field": "year",
-         "range": "viridis",
-         "domain": [1970, 2020]
-   }
+@misc{gpt4all,
+  author = {Yuvanesh Anand and Zach Nussbaum and Brandon Duderstadt and Benjamin Schmidt and Andriy Mulyar},
+  title = {GPT4All: Training an Assistant-style Chatbot with Large Scale Data Distillation from GPT-3.5-Turbo},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/nomic-ai/gpt4all}},
 }
-
-```
-
-## Implemented aesthetics.
-
-1. x
-2. y
-3. size
-4. jitter_radius: size of jitter. API subject to change.
-5. jitter_speed: speed of jitter. API subject to change.
-6. color (categorical or linear: range can call color scales explicitly, or accepting any d3-color name.)
-7. `x0` (for animations; transitions between x0 and x)
-8. `y0` (for animations; transitions between y0 and y)
-9. `filter`. (Filtering is treated as an aesthetic operation by this library.)
-
-## Planned
-
-1. Symbol (Mapping of categorical variables to single unicode points in a single font; probably 255 max.)
-2. Label (Full-text label)
-3. Image (Like PixPlot)
-
-## Jitter
-
-Jitter is a little overloaded with features right now, but some are quite fun.
-
-jitter method is set on 'method' key of the 'jitter_radius' field. Possible values are:
-
-1. `circle`
-2. `spiral`
-3. `time`
-4. `normal`
-
-# Principles
-
-1. This is a 2d library. No fake 3d.
-2. The central zoom state is handled by d3-zoom.
-3. Use the zoom state to render other layers on top of Deepscatter by hooking in (note `on_zoom` is directly set, _not_ passed in via `prefs`):
-
-```js
-const scatterplot = new Scatterplot('#deepscatter');
-scatterplot.on_zoom = (transform) => {...}
 ```
